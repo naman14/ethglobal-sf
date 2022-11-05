@@ -16,7 +16,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.checkIfWalletIsConnected()
+    // this.checkIfWalletIsConnected()
   }
 
 
@@ -97,7 +97,7 @@ export default class App extends React.Component {
     return (
       <div className="container">
 
-        {!this.state.connectedAccount && <button type="button" onclick="connectWallet()">Connect wallet</button>}
+        {!this.state.connectedAccount ? <button type="button" onClick={this.connectWallet}>Connect wallet</button> : <p>{this.state.connectedAccount}</p>}
          
         {this.state.loading && <div className="loader"/>}
 
