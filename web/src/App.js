@@ -1,107 +1,64 @@
-import ReactDOM from "react-dom";
+import { useState } from 'react'
+import { WagmiConfig, createClient, chain } from "wagmi";
 
-import logo from './logo.svg';
+import { useAccount } from 'wagmi'
+
+import { ConnectKitProvider, ConnectKitButton, getDefaultClient } from "connectkit";
 import './App.css';
-import { BigNumber, ethers } from 'ethers'
-import React from 'react';
+import DeployLock from './DeployLock'
+import PurchaseKey from './PurchaseKey';
+const alchemyId = process.env.ALCHEMY_ID;
 
-export default class App extends React.Component {
+const chains = [chain.polygonMumbai];
 
-  constructor() {
-    super();
-    this.state = {
-      loading: false,
-      connectedAccount: undefined
-    }
-  }
+const client = createClient(
+  getDefaultClient({
+    appName: "ETH SF",
+    alchemyId,
+    chains
+  }),
+);
 
-  componentDidMount() {
-    // this.checkIfWalletIsConnected()
-  }
+const App = () => {
+  return (
+    <div className="App">
+      <header className="App-header">
 
-
-  checkIfWalletIsConnected = async () => {
-
-    this.setState({ loading: true })
-
-    const { ethereum } = window;
-
-    if (!ethereum) {
-      console.log("Make sure you have metamask!")
-      this.setState({ loading: false })
-      return;
-    } else {
-      console.log("We have the ethereum object", ethereum);
-      console.log(window.ethereum.networkVersion, 'window.ethereum.networkVersion');
-    }
-
-    const accounts = await ethereum.request({ method: 'eth_accounts' });
-
-    if (accounts.length !== 0) {
-      const account = accounts[0];
-      this.onWalletConnected(account)
-      this.setState({ loading: false })
-    } else {
-      console.log("No authorized account found")
-      this.setState({ loading: false })
-    }
-
-    ethereum.on('accountsChanged', (accounts) => {
-      const account = accounts[0];
-      this.onWalletConnected(account)
-    });
-  }
-
-  onWalletConnected = async (account) => {
-    if (account) {
-      console.log("Found an authorized account:", account);
-      this.setState({ connectedAccount: account })
-    }
-  }
-
-  connectWallet = async () => {
-    try {
-      const { ethereum } = window;
-
-      if (!ethereum) {
-        alert("Get Metamask!");
-        return;
-
-      }
-      if (this.state.connectedAccount == '') {
-        const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-        this.onWalletConnected(accounts[0])
-      } else {
-        const permissions = await ethereum.request({ method: "wallet_requestPermissions", params: [{ eth_accounts: {} }] });
-        const accountsPermission = permissions.find(
-          (permission) => permission.parentCapability === 'eth_accounts'
-        );
-        if (accountsPermission) {
-          const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-          this.onWalletConnected(accounts[0])
-        }
-      }
-
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-
-  renderUI = () => {
-
-  }
-
-  render() {
-    return (
-      <div className="container">
-
-        {!this.state.connectedAccount ? <button type="button" onClick={this.connectWallet}>Connect wallet</button> : <p>{this.state.connectedAccount}</p>}
-         
-        {this.state.loading && <div className="loader"/>}
-
-      </div>
+        <WagmiConfig client={client}>
+          <ConnectKitProvider>
+            <Content></Content>
+          </ConnectKitProvider>
+        </WagmiConfig>
+      </header>
+    </div>
   );
+};
+
+const Content = () => {
+  const { isConnected } = useAccount()
+  const [action, setAction] = useState('');
+
+  if (!isConnected) {
+    return <ConnectKitButton />
+
   }
+  return <>
+    <div className="absolute top-0 right-0 p-4">
+      <ConnectKitButton />
+    </div>
+
+    {action === 'deploy' && <DeployLock />}
+    {action === 'purchase' && <PurchaseKey />}
+
+    {action === '' && <>
+      <h1>Using Unlock with Wagmi!</h1>
+      <button className='block w-1/2 mt-8 px-4 py-3 text-white text-base bg-blue-700 hover:bg-blue-800 focus:outline-none rounded-lg text-center' onClick={() => setAction('deploy')}>Deploy Lock</button>
+      <button className='block w-1/2 mt-8 px-4 py-3 text-white text-base bg-blue-700 hover:bg-blue-800 focus:outline-none rounded-lg text-center' onClick={() => setAction('purchase')}>Purchase Key</button>
+    </>}
+    {action !== '' && <button className='block w-1/2 mt-8 px-4 py-3 text-white text-base bg-red-700 hover:bg-red-800 focus:outline-none rounded-lg text-center' onClick={() => setAction('')}>Cancel</button>}
+
+  </>
 }
+
+
+export default App
