@@ -5,6 +5,8 @@
     "hardhat": "^2.12.2"
   },
   "dependencies": {
-    "@unlock-protocol/contracts": "^0.0.13"
+    "@unlock-protocol/contracts": "^0.0.13",
+    "bootstrap": "^5.2.2",
+    "react-bootstrap": "^2.5.0"
   }
 }
