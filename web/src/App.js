@@ -52,7 +52,7 @@ const Content = () => {
     {action === 'purchase' && <PurchaseKey />}
 
     {action === '' && <>
-      <h1>Using Unlock with Wagmi!</h1>
+      <h1>Get your tickets now!</h1>
       <button className='block w-1/2 mt-8 px-4 py-3 text-white text-base bg-blue-700 hover:bg-blue-800 focus:outline-none rounded-lg text-center' onClick={() => setAction('deploy')}>Deploy Lock</button>
       <button className='block w-1/2 mt-8 px-4 py-3 text-white text-base bg-blue-700 hover:bg-blue-800 focus:outline-none rounded-lg text-center' onClick={() => setAction('purchase')}>Purchase Key</button>
     </>}
