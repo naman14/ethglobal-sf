@@ -4,6 +4,9 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import {ethers} from "ethers"
+import {create} from "ipfs-http-client";
+import {timeout} from "../utils";
+import axios from "axios";
 
 export default class CreateEvent extends Component {
 
@@ -56,12 +59,44 @@ export default class CreateEvent extends Component {
         // this.routeToPage('home');
     }
 
-    onImagePick = async (event) => {
-        console.log('on image pick')
-        event.preventDefault();
+    fileToDataUri = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            resolve(event.target.result)
+        };
+        reader.readAsDataURL(file);
+    })
 
-        this.setState({coverImageUri: event.target.value})
-      };
+    sendFileToIPFS = async (e) => {
+        const fileImg = e.target.files[0]
+        if (fileImg) {
+            try {
+
+                const formData = new FormData();
+                formData.append("file", fileImg);
+
+                const resFile = await axios({
+                    method: "post",
+                    url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+                    data: formData,
+                    headers: {
+                        'pinata_api_key': '8c945ab09fbaf629064c',
+                        'pinata_secret_api_key': '7d643f07a4f64e5babf40b940bc4c86372208c316b4ca22f19eb0d5802dc8604',
+                        "Content-Type": "multipart/form-data"
+                    },
+                });
+
+                const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
+                console.log(ImgHash);
+//Take a look at your Pinata Pinned section, you will see a new file added to you list.
+
+
+            } catch (error) {
+                console.log("Error sending File to IPFS: ")
+                console.log(error)
+            }
+        }
+    }
 
 
     render() {
@@ -70,7 +105,7 @@ export default class CreateEvent extends Component {
                 <Form.Group>
                     <Form.Label>Select Event Pictures</Form.Label>
                     <Form.Control type="file" placeholder="Enter event name here..."
-                                  onChange={e => this.onImagePick(e)}/>
+                                  onChange={e => this.sendFileToIPFS(e)}/>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Event Name</Form.Label>
