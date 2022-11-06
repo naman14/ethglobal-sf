@@ -43,3 +43,9 @@ letter-spacing: -0.04em;
 
 color: #FFFFFF;
 }
+
+#lens-badge {
+    position: absolute;
+    right: 30px;
+    top: 80px;
+}

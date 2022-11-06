@@ -6,7 +6,7 @@ export const fetchEvents  = async () => {
     console.log('fetching events')
     let contract = eventContract()
     let events = await contract.getAllEvents()
-    // console.log(events)
+    console.log(events)
     return events.map((event) => {
         return {
             lockAddress: event.lockAddress,
