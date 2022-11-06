@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.4;
 
 import "./interfaces/IUnlock.sol";
 import "./interfaces/IPublicLock.sol";
@@ -10,6 +10,7 @@ import "@unlock-protocol/contracts/dist/Hooks/ILockTokenURIHook.sol";
 import "@unlock-protocol/contracts/dist/Hooks/ILockKeyTransferHook.sol";
 
 contract Event {
+
     event NewEvent(
         address indexed lockAddress,
         address indexed eventCreator,
@@ -42,19 +43,12 @@ contract Event {
     }
 
     function createEvent(EventDetails memory eventDetails) public payable {
-        bytes memory data = abi.encodeWithSignature(
-            "initialize(address,uint256,address,uint256,uint256,string)",
-            msg.sender,
-            type(uint256).max,
-            address(0),
-            eventDetails.price,
-            eventDetails.totalTickets,
-            eventDetails.eventTitle
-        );
+        bytes memory data = getEventCreationData(eventDetails);
+
         address lockAddress = IUnlock(unlockFactoryAddress)
             .createUpgradeableLock(data);
 
-        IPublicLock(lockAddress).addLockManager(address(this));
+        IPublicLock(lockAddress).addLockManager(msg.sender);
         IPublicLock(lockAddress).setEventHooks(
             address(this),
             address(this),
@@ -71,6 +65,18 @@ contract Event {
         eventOrganisers[msg.sender].push(eventDetails);
 
         emit NewEvent(lockAddress, msg.sender, eventDetails);
+    }
+
+    function getEventCreationData(EventDetails memory eventDetails) public view returns (bytes memory) {
+        return abi.encodeWithSignature(
+            "initialize(address,uint256,address,uint256,uint256,string)",
+            address(this),
+            type(uint256).max,
+            address(0),
+            eventDetails.price,
+            eventDetails.totalTickets,
+            eventDetails.eventTitle
+        );
     }
 
     function keyPurchasePrice(
@@ -124,6 +130,6 @@ contract Event {
         address to,
         uint256 expirationTimestamp
     ) external {
-        
+
     }
 }
