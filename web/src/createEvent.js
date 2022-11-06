@@ -32,8 +32,7 @@ import {signedEventContract} from "./constants"
 
 export const createNewEvent = async (eventDetails) => {
     console.log('creating new event')
-    eventDetails.address = '0x0000000000000000000000000000000000000000';
-    eventDetails.createdAt = Date.now();
+    console.log(eventDetails)
     let contract = signedEventContract();
     console.log(contract)
     let tx = await contract.createEvent(eventDetails, {value: '0'})

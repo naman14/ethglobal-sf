@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import {ethers, BigNumber} from "ethers"
 
 export default class CreateEvent extends Component {
 
@@ -29,7 +30,23 @@ export default class CreateEvent extends Component {
 
     onSubmit = () => {
         console.log(this.state)
-        this.submitEvent(this.state)
+
+        let eventDetails = [
+            '0x0000000000000000000000000000000000000000',
+            this.state.eventTitle,
+            this.state.eventDescription,
+            ethers.utils.parseEther(this.state.price),
+            this.state.location,
+            this.state.organiser,
+            this.state.organiserContact,
+            this.state.coverImageUri,
+            this.state.totalTickets,
+            Date.now() - 24 * 60 * 60 * 1000,
+            Date.now() + 24 * 60 * 60 * 1000,
+            Date.now()
+        ]
+
+        this.submitEvent(eventDetails)
     }
 
     render() {
