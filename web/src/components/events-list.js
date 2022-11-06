@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 
 import './events-list.css';
 import { fetchEvents } from '../fetchEvents';
+import EventListItem from './event-list-item';
 
 export default class EventList extends Component {
     constructor(props) {
@@ -10,7 +11,6 @@ export default class EventList extends Component {
             events :[]
         }
     }
-
     componentDidMount() {
         this.getEvents();
     }
@@ -24,7 +24,7 @@ export default class EventList extends Component {
             <>
                 <div id="event-list-bg">
                     {this.state.events.map((event, index) => {
-                    return <li key={index}>{event.lockAddress}</li>
+                    return <EventListItem event={event} key={index}></EventListItem>
                 })}
                 </div>
             </>

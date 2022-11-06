@@ -3,3 +3,20 @@
     width: 1000px;
     background-color: black;
 }
+
+.event-item-body {
+    width: 700px;
+    height: 130px;
+}
+
+.event-item-img {
+    width: 130px;
+    height: 130px;
+    background-image: url(../../public/event-default-img.png);
+}
+
+.event-item-title {
+    position: relative;
+    font-size: 20px;
+    left: 0;
+}
