@@ -6,6 +6,20 @@
 
 #create-event-but {
     right: 30px;
-    top: 5px;
+    top: 25px;
     position: absolute;
+    border-radius: 20px;
+}
+
+#event-header-title {
+    position: absolute;
+    top: 135px;
+    font-size: 60px;
+}
+
+#event-header-subtitle {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    font-size: 15px;
 }
