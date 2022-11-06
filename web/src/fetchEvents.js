@@ -58,6 +58,10 @@ export const fetchPeopleCounts = async (lockAddresses) => {
           address
           totalKeys
           maxNumberOfKeys
+          keys {
+            id
+            owner
+          }
         }
       }
     `
@@ -69,7 +73,31 @@ export const fetchPeopleCounts = async (lockAddresses) => {
     let locks = data.data.locks;
     let peopleCountMap = new Map();
     for (let i = 0; i < locks.length; ++i) {
-        peopleCountMap.set(locks[i].id, {attending: locks[i].totalKeys, maxAttendees: locks[i].maxNumberOfKeys})
+        peopleCountMap.set(locks[i].id, {
+            attending: locks[i].totalKeys,
+            maxAttendees: locks[i].maxNumberOfKeys,
+            attendeeKeys: locks[i].keys
+        })
     }
+    console.log(peopleCountMap)
+    fetchLensHandles("0x16b1025cD1A83141bf93E47dBC316f34f27f2e76")
     return peopleCountMap;
 }
+
+export const fetchLensHandles = async (addresses) => {
+    // console.log("fetching lens for " + addresses)
+    const hadnleQuery = `{
+        profiles(where: {owner_in: ["${addresses}"]}) {
+          handle
+        }
+      }`
+    const client = new ApolloClient({
+        uri: 'https://api.thegraph.com/subgraphs/name/anudit/lens-protocol',
+        cache: new InMemoryCache(),
+    });
+    let data = await client.query({query: gql(hadnleQuery)});
+    // console.log("Fetching lens stuff")
+    console.log(data)
+    return data.data.profiles
+}
+
