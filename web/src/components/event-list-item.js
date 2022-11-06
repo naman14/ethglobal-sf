@@ -188,7 +188,7 @@ export default class EventListItem extends Component {
                                 display: 'flex', flexDirection: 'row', textAlign: 'left'
                             }}>
                                 <WalletSignedUpImg src="wallet_outline.png"></WalletSignedUpImg>
-                                <WalletSignedUpText>{this.attendeeCount.attending} out of {this.attendeeCount.maxAttendees} Wallets Signed Up</WalletSignedUpText>
+                                <WalletSignedUpText>{this.attendeeCount.attending} out of {this.attendeeCount.maxAttendees} confirmed attendees</WalletSignedUpText>
                             </div>
 
                             <RegisterButton onClick={this.onRegisterClick}>Register</RegisterButton>

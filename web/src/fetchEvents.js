@@ -34,10 +34,13 @@ export const fetchEvents = async () => {
             organiser: event.organiser,
             organiserContact: event.organiserContact,
             coverImageUri: event.coverImageUri,
+            singleEntry: event.singleEntry,
+            transferrable: event.transferrable,
             totalTickets: event.totalTickets.toString(),
             startTime: event.startTime.toString(),
             endTime: event.endTime.toString(),
-            createdAt: event.createdAt.toString()
+            createdAt: event.createdAt.toString(),
+            baseTicketUri: event.baseTicketUri
         }
     })
 }

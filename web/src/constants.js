@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 
-export const EVENT_CONTRACT_ADDRESS = "0xc8ca9e89Eff5E3A4B1D7a3Bd2593F85CDC6a3383"
+export const EVENT_CONTRACT_ADDRESS = "0x5ae6922e1C275A6f6fc78D3Ce0BCa84D63aE82B4"
 export const INFURA_KEY = "ad393a56503f4e61bdf7321bd496f574"
 
 export const eventContract = () => {

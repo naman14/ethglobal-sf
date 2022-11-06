@@ -143,6 +143,8 @@ contract Event {
         address to,
         uint256 expirationTimestamp
     ) external {
-        require(locksToEvent[lockAddress].transferrable, "ticket not transferrable");
+        if (from != address(0) && to != address(0)) {
+            require(locksToEvent[lockAddress].transferrable, "ticket not transferrable");
+        }
     }
 }
