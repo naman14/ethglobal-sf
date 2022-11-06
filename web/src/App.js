@@ -8,6 +8,7 @@ import './App.css';
 import DeployLock from './DeployLock'
 import PurchaseKey from './PurchaseKey';
 import IndexHeader from './components/index-header'
+import EventDetails from './EventDetails';
 const alchemyId = process.env.ALCHEMY_ID;
 
 const chains = [chain.polygonMumbai];
@@ -41,8 +42,9 @@ const Content = () => {
 
   if (!isConnected) {
     return <ConnectKitButton />
-
+    
   }
+
   return <>
     <div className="absolute top-0 right-0 p-4">
       <ConnectKitButton />
