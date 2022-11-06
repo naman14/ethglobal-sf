@@ -56,7 +56,11 @@ export default class CreateEvent extends Component {
 
         console.log(eventDetails)
         this.submitEvent(eventDetails)
-        // this.routeToPage('home');
+        this.routeToPage('home');
+    }
+
+    uploadTicketToIPFS = async () => {
+        // const fileLoc =
     }
 
     fileToDataUri = (file) => new Promise((resolve, reject) => {
@@ -69,6 +73,7 @@ export default class CreateEvent extends Component {
 
     sendFileToIPFS = async (e) => {
         const fileImg = e.target.files[0]
+        console.log(fileImg);
         if (fileImg) {
             try {
 
@@ -161,11 +166,9 @@ export default class CreateEvent extends Component {
                     </Col>
                     <Col>
                         <Form.Group as={Col} controlId="formGridState">
-                            <Form.Select defaultValue="ETH">
+                            <Form.Select defaultValue="MATIC">
+                                <option>MATIC</option>
                                 <option>ETH</option>
-                                <option>BTC</option>
-                                <option>XRP</option>
-                                <option>LUNA</option>
                             </Form.Select>
                         </Form.Group>
                     </Col>
