@@ -10,6 +10,7 @@ import PurchaseKey from './PurchaseKey';
 import IndexHeader from './components/index-header'
 import EventList from './components/events-list';
 
+import EventDetails from './EventDetails';
 const alchemyId = process.env.ALCHEMY_ID;
 
 const chains = [chain.polygonMumbai];
@@ -45,6 +46,7 @@ const Content = () => {
     return <ConnectKitButton />
 
   }
+
   return <>
     <div className="absolute top-0 right-0 p-4">
       <ConnectKitButton />

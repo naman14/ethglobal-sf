@@ -9,6 +9,13 @@ export const eventContract = () => {
     return eventContract;
 }
 
+export const signedEventContract = () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(EVENT_CONTRACT_ADDRESS, EVENT_CONTRACT_ABI, signer);
+    return contract
+}
+
 export const EVENT_CONTRACT_ABI = [
     {
       "inputs": [
