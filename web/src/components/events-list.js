@@ -21,7 +21,7 @@ export default class EventList extends Component {
     }
     render() {
         return (
-            <div style={{marginLeft: '50px', marginRight: '50px'}}>
+            <div style={{marginLeft: '200px', marginRight: '200px'}}>
                 <div id="event-list-bg">
                     {this.state.events.map((event, index) => {
                     return <EventListItem event={event} key={index}></EventListItem>

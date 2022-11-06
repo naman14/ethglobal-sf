@@ -33,6 +33,7 @@ const EventTitle = styled.p`
 margin-left: 24px;
 margin-right: 24px;
 margin-top: 24px;
+margin-bottom: -5px;
 
 font-family: 'Satoshi';
 font-style: normal;
@@ -52,7 +53,7 @@ text-fill-color: transparent;
 const EventLocationTime = styled.p`
 margin-left: 24px;
 margin-right: 24px;
-margin-top: 16px;
+margin-top: 10px;
 
 font-family: 'Satoshi';
 font-style: normal;
@@ -69,7 +70,40 @@ background: linear-gradient(93.84deg, #FFFFFF -16.51%, rgba(255, 255, 255, 0.86)
 background-clip: text;
 text-fill-color: transparent;
 
-opacity: 0.4;
+opacity: 0.6;
+`
+
+const WalletSignedUpImg = styled.img`
+width: 32px;
+height: 32px;
+left: 20px;
+margin-top: 50px;
+margin-left: 20px;
+
+background: #FFFFFF;
+border-radius: 103.571px;
+`
+
+const WalletSignedUpText = styled.span`
+height: 18px;
+left: 341px;
+margin-top: 57px;
+margin-left: 15px;
+
+font-family: 'Satoshi';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 100%;
+
+/* identical to box height, or 18px */
+letter-spacing: -0.04em;
+
+background: linear-gradient(93.84deg, #FFFFFF -16.51%, rgba(255, 255, 255, 0.86) 48.85%, #FFFFFF 110.24%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
 `
 
 export default class EventListItem extends Component {
@@ -80,15 +114,21 @@ export default class EventListItem extends Component {
     render() {
         return (
             <>
-               <ListItem>
-                <Image src='event-default-img.png'/>
-                <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left'}}>
+                <ListItem>
+                  <Image src='event-default-img.png'/>
+                  <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left'}}>
 
-                <EventTitle>{this.event.eventTitle}</EventTitle>
-                <EventLocationTime>{this.event.location} {this.event.startTime}</EventLocationTime>
-
-                </div>
-               </ListItem>
+                    <EventTitle>{this.event.eventTitle}</EventTitle>
+                    <EventLocationTime>{this.event.location} {this.event.startTime}</EventLocationTime>
+                    <div style={{display: 'flex', flexDirection: 'row', textAlign: 'left'}}>
+                        <WalletSignedUpImg src="wallet_outline.png"></WalletSignedUpImg>
+                        <WalletSignedUpText>300 Wallets Signed Up</WalletSignedUpText>
+                    </div>
+                  </div>
+                  <div>
+                    
+                  </div>
+                </ListItem>
             </>
         );
     }
