@@ -3,11 +3,13 @@ import * as React from 'react'
 import './index-header.css';
 import Button from 'react-bootstrap/Button';
 
-function IndexHeader() {
+function IndexHeader(props) {
+    const {routeToPage} = props;
     return (
         <>
-            <div  id="main-header"></div>
-            <Button id="create-event-but" variant="primary">Create Event</Button>{' '}
+            <div id="main-header"></div>
+            <Button id="create-event-but" variant="primary" onClick={() => routeToPage('create')}>Create
+                Event</Button>{' '}
         </>
     );
 }
