@@ -120,7 +120,8 @@ font-weight: 700;
 font-size: 14px;
 line-height: 100%;
 color: #000000;
-margin-left: auto
+margin-top: 22px;
+margin-left: 300px;
 
 `
 
