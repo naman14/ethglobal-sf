@@ -28,7 +28,7 @@ export default class EventDetails extends React.Component {
         return (
             <div>
                 <div className="absolute top-0 center">
-                    <IndexHeader  ></IndexHeader>
+                    <IndexHeader ></IndexHeader>
                 </div>
                 <EventImage src="https://ipfs.io/ipfs/QmZHni7iQM2aNYXwpP7BRUmQEjJw4rzrPjMkresNm3vfSr?filename=event_cover_image.png"/>
                 <p>{this.props.eventData.eventTitle}</p>

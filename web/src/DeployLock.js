@@ -76,10 +76,10 @@ export function DeployLock() {
       }}
     >
 
-      <p className='block text-left'>Deploy a new membership contract!</p>
+      <p className='block text-left'>Create a new event</p>
 
       <div className="mb-6">
-        <label className="text-base	block text-left">Name:</label>
+        <label className="text-base	block text-left">Event Name</label>
         <input
           aria-label="Name"
           className='text-base px-4 py-3 w-full rounded text-black text-base'
@@ -89,7 +89,7 @@ export function DeployLock() {
       </div>
 
       <div className="mb-6">
-        <label className="text-base	block text-left">Duration (days):</label>
+        <label className="text-base	block text-left">Duration</label>
         <input
           aria-label="Duration"
           className='text-base px-4 py-3 w-full rounded text-black text-base'
@@ -100,7 +100,7 @@ export function DeployLock() {
       </div>
 
       <div className="mb-6">
-        <label className="text-base	block text-left">Supply:</label>
+        <label className="text-base	block text-left">Venue</label>
         <input
           aria-label="Supply"
           className='text-base px-4 py-3 w-full rounded text-black text-base'
@@ -111,7 +111,7 @@ export function DeployLock() {
       </div>
 
       <div className="mb-6">
-        <label className="text-base	block text-left">Currency (address of the ERC20 contract used as currency for purchases. Leave empty to use the chain's base currency):</label>
+        <label className="text-base	block text-left">Description</label>
         <input
           aria-label="Currency"
           className='text-base px-4 py-3 w-full rounded text-black text-base'

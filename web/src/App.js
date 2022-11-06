@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Component, useState } from 'react'
 import { WagmiConfig, createClient, chain } from "wagmi";
 
 import { useAccount } from 'wagmi'
@@ -10,7 +10,10 @@ import './App.css';
 import DeployLock from './DeployLock'
 import PurchaseKey from './PurchaseKey';
 import IndexHeader from './components/index-header'
+import EventList from './components/events-list';
+
 import EventDetails from './EventDetails';
+import CreateEvent from "./components/CreateEvent";
 
 const alchemyId = process.env.ALCHEMY_ID;
 
@@ -43,24 +46,45 @@ letter-spacing: -0.04em;
 
 `
 
-const App = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
+class App extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      page: 'home'
+    }
+  }
 
-        <WagmiConfig client={client}>
-          <ConnectKitProvider>
-            <Content></Content>
-          </ConnectKitProvider>
-        </WagmiConfig>
-      </header>
-    </div>
-  );
-};
+  routeToPage = (page) => {
+    console.log("btn clicked")
+    this.setState({
+      page: page
+    })
 
-const Content = () => {
+  };
+
+
+  render() {
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <WagmiConfig client={client}>
+            <ConnectKitProvider>
+              {this.state.page === 'home' ? <Content routeToPage={this.routeToPage}></Content> : ''}
+              {this.state.page === 'create' ? <CreateEvent routeToPage={this.routeToPage}></CreateEvent> : ''}
+            </ConnectKitProvider>
+          </WagmiConfig>
+        </header>
+      </div>
+    );
+  }
+}
+
+
+const Content = (props) => {
   const { isConnected } = useAccount()
   const [action, setAction] = useState('');
+  const { routeToPage } = props;
 
   if (!isConnected) {
     return <ConnectKitButton />
@@ -69,14 +93,21 @@ const Content = () => {
 
   return <>
 
-    <div style={{position: 'absolute', width: '100%', top: '0px'}}>
-      <IndexHeader  ></IndexHeader>
-      <img style={{width: '100%', height: '350px'}} src="/images/header-background.png"></img>
-      <HeaderTitle>Discover Web3 Events</HeaderTitle>
+    <div style={{ display: 'flex', flexDirection: 'column',  width: '100%', top: '0px' }}>
+
+      <div>
+        <IndexHeader routeToPage={routeToPage} ></IndexHeader>
+        <img style={{ width: '100%', height: '300px' }} src="/images/header-background.png"></img>
+        <HeaderTitle>Discover Web3 Events</HeaderTitle>
+      </div>
+
+
+      <EventList></EventList>
     </div>
 
 
-{/* 
+
+    {/* 
     {action === 'deploy' && <DeployLock />}
     {action === 'purchase' && <PurchaseKey />}
 
