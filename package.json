@@ -8,6 +8,7 @@
   "dependencies": {
     "@unlock-protocol/contracts": "^0.0.13",
     "bootstrap": "^5.2.2",
-    "react-bootstrap": "^2.5.0"
+    "react-bootstrap": "^2.5.0",
+    "react-ipfs-uploader": "^1.2.7"
   }
 }
