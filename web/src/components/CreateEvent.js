@@ -51,8 +51,9 @@ export default class CreateEvent extends Component {
             'base ticket uri' // todo add ipfs ticket html here
         ]
 
+        console.log(eventDetails)
         this.submitEvent(eventDetails)
-        this.routeToPage('home');
+        // this.routeToPage('home');
     }
 
 
@@ -74,21 +75,21 @@ export default class CreateEvent extends Component {
                     <Form.Control type="text" placeholder="Enter the venue here..."
                                   onChange={e => this.setState({location: e.target.value})}/>
                 </Form.Group>
-                <Form.Group className="mb-2">
+                {/* <Form.Group className="mb-2">
                     <Form.Label>Description</Form.Label>
                     <Form.Control type="text" placeholder="Enter description here..."
                                   onChange={e => this.setState({eventDescription: e.target.value})}/>
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group className="mb-2">
                     <Form.Label>Organizer</Form.Label>
                     <Form.Control type="text" placeholder="Enter organizer here..."
                                   onChange={e => this.setState({organiser: e.target.value})}/>
                 </Form.Group>
-                <Form.Group className="mb-2">
+                {/* <Form.Group className="mb-2">
                     <Form.Label>Organizer Contact</Form.Label>
                     <Form.Control type="text" placeholder="Enter organizer contact here..."
                                   onChange={e => this.setState({organiserContact: e.target.value})}/>
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Label>Entry Type</Form.Label>
                 <Form.Group className="mb-2" onChange={e => this.setState({entry: e.target.value})}>
                     <Row>
