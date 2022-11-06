@@ -7,4 +7,5 @@ export const fetchEvents  = async () => {
     let contract = eventContract()
     let events = await contract.getAllEvents()
     console.log(events)
+    return events
 }

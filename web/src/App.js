@@ -8,6 +8,7 @@ import './App.css';
 import DeployLock from './DeployLock'
 import PurchaseKey from './PurchaseKey';
 import IndexHeader from './components/index-header'
+import EventList from './components/events-list';
 
 const alchemyId = process.env.ALCHEMY_ID;
 
@@ -60,6 +61,7 @@ const Content = () => {
     {action !== '' && <button className='block w-1/2 mt-8 px-4 py-3 text-white text-base bg-red-700 hover:bg-red-800 focus:outline-none rounded-lg text-center' onClick={() => setAction('')}>Cancel</button>} */}
     <div className="absolute top-0 center">
       <IndexHeader  ></IndexHeader>
+      <EventList></EventList>
     </div>
   </>
 }
