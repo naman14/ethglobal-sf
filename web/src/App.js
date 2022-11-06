@@ -42,7 +42,7 @@ const Content = () => {
 
   if (!isConnected) {
     return <ConnectKitButton />
-    
+
   }
 
   return <>
