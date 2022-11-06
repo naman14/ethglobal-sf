@@ -24,7 +24,7 @@ export default class EventList extends Component {
             <>
                 <div id="event-list-bg">
                     {this.state.events.map((event, index) => {
-                    return <li key={index}>{event[0][0]}</li>
+                    return <li key={index}>{event.lockAddress}</li>
                 })}
                 </div>
             </>
