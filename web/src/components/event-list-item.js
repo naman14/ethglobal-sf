@@ -132,40 +132,33 @@ export default class EventListItem extends Component {
     onRegisterClick = () => {
         console.log('onregister')
 
-       const script = document.createElement("script");
-
-       script.setAttribute('type', 'text/javascript');
-
-       script.innerHtml = `
-       (function(d, s) {
-        var js = d.createElement(s),
-          sc = d.getElementsByTagName(s)[0];
-        js.src="https://paywall.unlock-protocol.com/static/unlock.latest.min.js";
-        sc.parentNode.insertBefore(js, sc); }(document, "script"));`
+        const script = document.createElement("script");
+        script.setAttribute('type', 'text/javascript');
+        script.src = 'https://paywall.unlock-protocol.com/static/unlock.latest.min.js'
 
         document.head.appendChild(script);
 
-          const script2 = document.createElement("script");
-          script2.setAttribute('type', 'text/javascript');
+        const script2 = document.createElement("script");
+        script2.setAttribute('type', 'text/javascript');
 
-          script2.innerHTML = `
+        script2.innerHTML = `
           var unlockProtocolConfig = {
             "network": 80001, 
             "locks": {
-              "0x3e7688598eD172f5b7dD727AEB7F5608b53968ED": {
-                "name": "Hello"
+              "${this.event.lockAddress}": {
+                "name": "${this.event.eventTitle}"
               }
             },
             "icon": "https://unlock-protocol.com/static/images/svg/unlock-word-mark.svg",
             "callToAction": {
-              "default": "Please unlock this demo!"
+              "default": "Register for this event"
             }
           }
-           `   
-           document.head.appendChild(script2);
+           `
+        document.head.appendChild(script2);
 
-           console.log(document)
-           window.unlockProtocol.loadCheckoutModal()
+        console.log(document)
+        window.unlockProtocol.loadCheckoutModal()
 
     }
 
