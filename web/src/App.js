@@ -8,7 +8,6 @@ import './App.css';
 import DeployLock from './DeployLock'
 import PurchaseKey from './PurchaseKey';
 import IndexHeader from './components/index-header'
-
 const alchemyId = process.env.ALCHEMY_ID;
 
 const chains = [chain.polygonMumbai];
