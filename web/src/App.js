@@ -7,6 +7,7 @@ import { ConnectKitProvider, ConnectKitButton, getDefaultClient } from "connectk
 import './App.css';
 import DeployLock from './DeployLock'
 import PurchaseKey from './PurchaseKey';
+import IndexHeader from './components/index-header'
 const alchemyId = process.env.ALCHEMY_ID;
 
 const chains = [chain.polygonMumbai];
@@ -46,7 +47,7 @@ const Content = () => {
     <div className="absolute top-0 right-0 p-4">
       <ConnectKitButton />
     </div>
-
+{/* 
     {action === 'deploy' && <DeployLock />}
     {action === 'purchase' && <PurchaseKey />}
 
@@ -55,8 +56,10 @@ const Content = () => {
       <button className='block w-1/2 mt-8 px-4 py-3 text-white text-base bg-blue-700 hover:bg-blue-800 focus:outline-none rounded-lg text-center' onClick={() => setAction('deploy')}>Deploy Lock</button>
       <button className='block w-1/2 mt-8 px-4 py-3 text-white text-base bg-blue-700 hover:bg-blue-800 focus:outline-none rounded-lg text-center' onClick={() => setAction('purchase')}>Purchase Key</button>
     </>}
-    {action !== '' && <button className='block w-1/2 mt-8 px-4 py-3 text-white text-base bg-red-700 hover:bg-red-800 focus:outline-none rounded-lg text-center' onClick={() => setAction('')}>Cancel</button>}
-
+    {action !== '' && <button className='block w-1/2 mt-8 px-4 py-3 text-white text-base bg-red-700 hover:bg-red-800 focus:outline-none rounded-lg text-center' onClick={() => setAction('')}>Cancel</button>} */}
+    <div className="absolute top-0 center">
+      <IndexHeader  ></IndexHeader>
+    </div>
   </>
 }
 

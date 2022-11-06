@@ -1,0 +1,11 @@
+#main-header {
+    background-image: url(../../public/header-background.png);
+    width: 1000px;
+    height: 300px;
+}
+
+#create-event-but {
+    right: 30px;
+    top: 5px;
+    position: absolute;
+}
