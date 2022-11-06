@@ -32,9 +32,9 @@ contract Event {
         uint256 createdAt;
     }
 
-    EventDetails[] public events;
-    mapping(address => EventDetails) public eventLocks;
-    mapping(address => EventDetails[]) public eventOrganisers;
+    EventDetails[] private allEvents;
+    mapping(address => EventDetails) private locksToEvent;
+    mapping(address => EventDetails[]) private organisersToEvents;
 
     address unlockFactoryAddress;
 
@@ -43,7 +43,15 @@ contract Event {
     }
 
     function createEvent(EventDetails memory eventDetails) public payable {
-        bytes memory data = getEventCreationData(eventDetails);
+        bytes memory data = abi.encodeWithSignature(
+            "initialize(address,uint256,address,uint256,uint256,string)",
+            address(this),
+            type(uint256).max,
+            address(0),
+            eventDetails.price,
+            eventDetails.totalTickets,
+            eventDetails.eventTitle
+        );
 
         address lockAddress = IUnlock(unlockFactoryAddress)
             .createUpgradeableLock(data);
@@ -60,23 +68,23 @@ contract Event {
         );
 
         eventDetails.lockAddress = lockAddress;
-        events.push(eventDetails);
-        eventLocks[lockAddress] = eventDetails;
-        eventOrganisers[msg.sender].push(eventDetails);
+        allEvents.push(eventDetails);
+        locksToEvent[lockAddress] = eventDetails;
+        organisersToEvents[msg.sender].push(eventDetails);
 
         emit NewEvent(lockAddress, msg.sender, eventDetails);
     }
 
-    function getEventCreationData(EventDetails memory eventDetails) public view returns (bytes memory) {
-        return abi.encodeWithSignature(
-            "initialize(address,uint256,address,uint256,uint256,string)",
-            address(this),
-            type(uint256).max,
-            address(0),
-            eventDetails.price,
-            eventDetails.totalTickets,
-            eventDetails.eventTitle
-        );
+    function getAllEvents() public view returns (EventDetails[] memory) {
+        return allEvents;
+    }
+
+     function getEventsForOrganiser(address organiser) public view returns (EventDetails[] memory) {
+        return organisersToEvents[organiser];
+    }
+
+    function getEventForLock(address lockAddress) public view returns (EventDetails memory) {
+        return locksToEvent[lockAddress];
     }
 
     function keyPurchasePrice(

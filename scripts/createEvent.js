@@ -9,7 +9,7 @@ const main = async () => {
     const [deployer] = await ethers.getSigners(); //get the account to deploy the contract
     console.log("interacting with the account:", deployer.address); 
 
-    let contractAddress = '0x7DCD79aE66e5C0a1b356Ff322d0cc8135Fd161e1'
+    let contractAddress = '0xcE479646045254e452F1c93f8a387B832Cd41010'
     const contractInstance = new ethers.Contract(contractAddress, abi, deployer);
     
     // address lockAddress;
@@ -27,7 +27,7 @@ const main = async () => {
 
     let eventDetails = [
         '0x0000000000000000000000000000000000000000',
-        'Test event',
+        'Test event 2',
         'this is a test event',
         '0',
         'Palace of Fine Arts',

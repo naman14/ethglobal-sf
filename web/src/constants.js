@@ -1,10 +1,10 @@
 import { ethers } from 'ethers'
 
-export const EVENT_CONTRACT_ADDRESS = "0x7DCD79aE66e5C0a1b356Ff322d0cc8135Fd161e1"
+export const EVENT_CONTRACT_ADDRESS = "0xcE479646045254e452F1c93f8a387B832Cd41010"
 export const INFURA_KEY = "ad393a56503f4e61bdf7321bd496f574"
 
 export const eventContract = () => {
-    const provider = new ethers.providers.InfuraProvider(null, INFURA_KEY);
+    const provider = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com');
     let eventContract = new ethers.Contract(EVENT_CONTRACT_ADDRESS, EVENT_CONTRACT_ABI, provider)
     return eventContract;
 }
@@ -184,74 +184,75 @@ export const EVENT_CONTRACT_ABI = [
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "name": "eventLocks",
+      "inputs": [],
+      "name": "getAllEvents",
       "outputs": [
         {
-          "internalType": "address",
-          "name": "lockAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "string",
-          "name": "eventTitle",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "eventDescription",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "price",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "location",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "organiser",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "organiserContact",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "coverImageUri",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "totalTickets",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "startTime",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "endTime",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "createdAt",
-          "type": "uint256"
+          "components": [
+            {
+              "internalType": "address",
+              "name": "lockAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "eventTitle",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "eventDescription",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "location",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "organiser",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "organiserContact",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "coverImageUri",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalTickets",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "endTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "createdAt",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct Event.EventDetails[]",
+          "name": "",
+          "type": "tuple[]"
         }
       ],
       "stateMutability": "view",
@@ -261,157 +262,12 @@ export const EVENT_CONTRACT_ABI = [
       "inputs": [
         {
           "internalType": "address",
-          "name": "",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "eventOrganisers",
-      "outputs": [
-        {
-          "internalType": "address",
           "name": "lockAddress",
           "type": "address"
-        },
-        {
-          "internalType": "string",
-          "name": "eventTitle",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "eventDescription",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "price",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "location",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "organiser",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "organiserContact",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "coverImageUri",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "totalTickets",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "startTime",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "endTime",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "createdAt",
-          "type": "uint256"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "events",
+      "name": "getEventForLock",
       "outputs": [
-        {
-          "internalType": "address",
-          "name": "lockAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "string",
-          "name": "eventTitle",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "eventDescription",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "price",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "location",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "organiser",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "organiserContact",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "coverImageUri",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "totalTickets",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "startTime",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "endTime",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "createdAt",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
         {
           "components": [
             {
@@ -476,16 +332,89 @@ export const EVENT_CONTRACT_ABI = [
             }
           ],
           "internalType": "struct Event.EventDetails",
-          "name": "eventDetails",
+          "name": "",
           "type": "tuple"
         }
       ],
-      "name": "getEventCreationData",
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "organiser",
+          "type": "address"
+        }
+      ],
+      "name": "getEventsForOrganiser",
       "outputs": [
         {
-          "internalType": "bytes",
+          "components": [
+            {
+              "internalType": "address",
+              "name": "lockAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "eventTitle",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "eventDescription",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "location",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "organiser",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "organiserContact",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "coverImageUri",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalTickets",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "endTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "createdAt",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct Event.EventDetails[]",
           "name": "",
-          "type": "bytes"
+          "type": "tuple[]"
         }
       ],
       "stateMutability": "view",
