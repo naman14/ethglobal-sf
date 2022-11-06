@@ -1,8 +1,10 @@
 import * as React from 'react'
+import {Link} from 'react'
 
 import './index-header.css';
 import Button from 'react-bootstrap/Button';
 import { ConnectKitProvider, ConnectKitButton, getDefaultClient } from "connectkit";
+import Badge from 'react-bootstrap/Badge';
 
 function IndexHeader(props) {
     const {routeToPage} = props;
@@ -13,6 +15,7 @@ function IndexHeader(props) {
             <div className="absolute top-0 right-0 p-4">
                 <ConnectKitButton />
             </div>
+            <a href="https://www.lensfrens.xyz/namand.lens" target="_blank" ><Badge id="lens-badge" bg="secondary">namand.lens</Badge></a>
         </>
     );
 }

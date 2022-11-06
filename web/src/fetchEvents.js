@@ -1,5 +1,5 @@
 import { ethers, BigNumber } from "ethers"
-
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 import { eventContract } from "./constants"
 
 export const fetchEvents = async () => {
@@ -18,6 +18,8 @@ export const fetchEvents = async () => {
         "mode": "cors",
         "credentials": "omit"
     });
+
+    fetchPeopleCounts();
 
     let responseJson = await response.json()
     let events = responseJson.data.events
@@ -38,4 +40,35 @@ export const fetchEvents = async () => {
             createdAt: event.createdAt.toString()
         }
     })
+}
+
+export const fetchPeopleCounts = async (lockAddresses) => {
+    if (lockAddresses == undefined) {
+        return {};
+    }
+    const client = new ApolloClient({
+        uri: 'https://api.thegraph.com/subgraphs/name/unlock-protocol/mumbai-v2',
+        cache: new InMemoryCache(),
+    })
+    const attendeeQuery = `
+    {
+        locks(where: {address_in: [${lockAddresses.join(",")}]}) {
+          id
+          address
+          totalKeys
+          maxNumberOfKeys
+        }
+      }
+    `
+    let data = await client
+        .query({
+            query: gql(attendeeQuery),
+        });
+        console.log(data.data.locks)
+    let locks = data.data.locks;
+    let peopleCountMap = new Map();
+    for (let i = 0; i < locks.length; ++i) {
+        peopleCountMap.set(locks[i].id, {attending: locks[i].totalKeys, maxAttendees: locks[i].maxNumberOfKeys})
+    }
+    return peopleCountMap;
 }

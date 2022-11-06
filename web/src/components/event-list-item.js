@@ -130,6 +130,7 @@ export default class EventListItem extends Component {
         this.event = props.event;
         this.startDate = new Date(props.event.startTime/1000);
         this.endDate = new Date(props.event.endTime/1000);
+        this.attendeeCount = props.attendeeCount;
     }
 
     onRegisterClick = () => {
@@ -166,6 +167,7 @@ export default class EventListItem extends Component {
     }
 
     render() {
+        // console.log(this.attendeeCount)
         return (
             <>
                 <ListItem>
@@ -186,7 +188,7 @@ export default class EventListItem extends Component {
                                 display: 'flex', flexDirection: 'row', textAlign: 'left'
                             }}>
                                 <WalletSignedUpImg src="wallet_outline.png"></WalletSignedUpImg>
-                                <WalletSignedUpText>300 Wallets Signed Up</WalletSignedUpText>
+                                <WalletSignedUpText>{this.attendeeCount.attending} out of {this.attendeeCount.maxAttendees} Wallets Signed Up</WalletSignedUpText>
                             </div>
 
                             <RegisterButton onClick={this.onRegisterClick}>Register</RegisterButton>
