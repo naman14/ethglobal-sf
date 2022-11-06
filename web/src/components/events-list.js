@@ -31,8 +31,6 @@ export default class EventList extends Component {
             <div style={{paddingLeft: '200px', paddingRight: '200px', backgroundColor: 'black'}}>
                 <div id="event-list-bg">
                     {this.state.events.map((event, index) => {
-                        // console.log("derp")
-                        // console.log(event)
                     return <EventListItem event={event} attendeeCount={this.state.attendeeCount.get(event.lockAddress)} key={index}></EventListItem>
                 })}
                 </div>

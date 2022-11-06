@@ -115,7 +115,7 @@ contract Event {
         uint256 expirationTimestamp
     ) external view returns (string memory) {
         string memory baseTicketUri= locksToEvent[lockAddress].baseTicketUri;
-        return string(abi.encodePacked(baseTicketUri,  "?ticketId=",  keyId.toString()));
+        return string(abi.encodePacked(baseTicketUri,  "?lock=", lockAddress, "&ticketId=",  keyId.toString()));
     }
 
     function onKeyTransfer(

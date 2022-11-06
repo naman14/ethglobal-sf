@@ -56,6 +56,13 @@ export default class CreateEvent extends Component {
         // this.routeToPage('home');
     }
 
+    onImagePick = async (event) => {
+        console.log('on image pick')
+        event.preventDefault();
+
+        this.setState({coverImageUri: event.target.value})
+      };
+
 
     render() {
         return (
@@ -63,7 +70,7 @@ export default class CreateEvent extends Component {
                 <Form.Group>
                     <Form.Label>Select Event Pictures</Form.Label>
                     <Form.Control type="file" placeholder="Enter event name here..."
-                                  onChange={e => this.setState({coverImageUri: e.target.value})}/>
+                                  onChange={e => this.onImagePick(e)}/>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Event Name</Form.Label>
