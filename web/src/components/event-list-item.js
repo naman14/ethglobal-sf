@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import './events-list.css'
 import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
@@ -106,28 +106,98 @@ background-clip: text;
 text-fill-color: transparent;
 `
 
+const RegisterButton = styled.button`
+width: 151px;
+height: 45px;
+paddingLeft: 12px;
+background-color: white;
+background: #FFFFFF;
+border-radius: 100px;
+font-family: 'Satoshi';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 100%;
+color: #000000;
+margin-left: auto
+
+`
+
 export default class EventListItem extends Component {
     constructor(props) {
         super()
         this.event = props.event;
     }
+
+    onRegisterClick = () => {
+        console.log('onregister')
+
+       const script = document.createElement("script");
+
+       script.setAttribute('type', 'text/javascript');
+
+       script.innerHtml = `
+       (function(d, s) {
+        var js = d.createElement(s),
+          sc = d.getElementsByTagName(s)[0];
+        js.src="https://paywall.unlock-protocol.com/static/unlock.latest.min.js";
+        sc.parentNode.insertBefore(js, sc); }(document, "script"));`
+
+        document.head.appendChild(script);
+
+          const script2 = document.createElement("script");
+          script2.setAttribute('type', 'text/javascript');
+
+          script2.innerHTML = `
+          var unlockProtocolConfig = {
+            "network": 80001, 
+            "locks": {
+              "0x3e7688598eD172f5b7dD727AEB7F5608b53968ED": {
+                "name": "Hello"
+              }
+            },
+            "icon": "https://unlock-protocol.com/static/images/svg/unlock-word-mark.svg",
+            "callToAction": {
+              "default": "Please unlock this demo!"
+            }
+          }
+           `   
+           document.head.appendChild(script2);
+
+           console.log(document)
+           window.unlockProtocol.loadCheckoutModal()
+
+    }
+
     render() {
         return (
             <>
                 <ListItem>
-                  <Image src='event-default-img.png'/>
-                  <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left'}}>
+                    <Image src='event-default-img.png' />
+                    <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
 
-                    <EventTitle>{this.event.eventTitle}</EventTitle>
-                    <EventLocationTime>{this.event.location} {this.event.startTime}</EventLocationTime>
-                    <div style={{display: 'flex', flexDirection: 'row', textAlign: 'left'}}>
-                        <WalletSignedUpImg src="wallet_outline.png"></WalletSignedUpImg>
-                        <WalletSignedUpText>300 Wallets Signed Up</WalletSignedUpText>
+                        <EventTitle>{this.event.eventTitle}</EventTitle>
+                        <EventLocationTime>{this.event.location} {this.event.startTime}</EventLocationTime>
+
+                        <div style={{
+                            display: 'flex', flexDirection: 'row', textAlign: 'left', justifyContent: 'space-between', flexGrow: 1
+                        }}>
+
+                            <div style={{
+                                display: 'flex', flexDirection: 'row', textAlign: 'left'
+                            }}>
+                                <WalletSignedUpImg src="wallet_outline.png"></WalletSignedUpImg>
+                                <WalletSignedUpText>300 Wallets Signed Up</WalletSignedUpText>
+                            </div>
+
+                            <RegisterButton onClick={this.onRegisterClick}>Register</RegisterButton>
+                        </div>
+
+
                     </div>
-                  </div>
-                  <div>
-                    
-                  </div>
+                    <div>
+
+                    </div>
                 </ListItem>
             </>
         );
