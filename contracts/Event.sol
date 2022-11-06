@@ -62,8 +62,9 @@ contract Event {
             .createUpgradeableLock(data);
 
         IPublicLock(lockAddress).addLockManager(msg.sender);
+        
         IPublicLock(lockAddress).setEventHooks(
-            address(this),
+            address(0),
             address(0),
             address(0),
             address(this),
@@ -105,24 +106,6 @@ contract Event {
         require(lock.hasRole(lock.LOCK_MANAGER_ROLE(), msg.sender), "only lock managers can set base uri");
         locksToEvent[lockAddress].baseTicketUri = _baseTicketUri;
     }
-
-    function keyPurchasePrice(
-        address from,
-        address recipient,
-        address referrer,
-        bytes calldata data
-    ) external view returns (uint256 minKeyPrice) {
-        return minKeyPrice;
-    }
-
-    function onKeyPurchase(
-        address from,
-        address recipient,
-        address referrer,
-        bytes calldata data,
-        uint256 minKeyPrice,
-        uint256 pricePaid
-    ) external {}
 
     function tokenURI(
         address lockAddress,

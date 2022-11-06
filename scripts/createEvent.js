@@ -9,7 +9,7 @@ const main = async () => {
     const [deployer] = await ethers.getSigners(); //get the account to deploy the contract
     console.log("interacting with the account:", deployer.address); 
 
-    let contractAddress = '0x5ae6922e1C275A6f6fc78D3Ce0BCa84D63aE82B4'
+    let contractAddress = '0xc51e54Db052B1EfB61AeD1197A1F7E8F9726b853'
     const contractInstance = new ethers.Contract(contractAddress, abi, deployer);
     
     // address lockAddress;
@@ -43,7 +43,7 @@ const main = async () => {
         'base uri'
     ]
 
-    var result = await contractInstance.estimateGas.createEvent(eventDetails, { value: '0'})
+    var result = await contractInstance.createEvent(eventDetails, { value: '0'})
     console.log(result)
 
   };
