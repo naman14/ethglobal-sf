@@ -42,10 +42,13 @@ export default class CreateEvent extends Component {
             this.state.organiser,
             this.state.organiserContact,
             this.state.coverImageUri,
+            this.state.entry == "Single",
+            this.state.isTransferable == "True",
             this.state.totalTickets,
             new Date(this.state.startTime).getTime(),
             new Date(this.state.endTime).getTime(),
-            Date.now()
+            Date.now(),
+            'base ticket uri' // todo add ipfs ticket html here
         ]
 
         this.submitEvent(eventDetails)
@@ -139,7 +142,7 @@ export default class CreateEvent extends Component {
                     </Row>
                 </Form.Group>
                 <Form.Label>Is Ticket Transferable</Form.Label>
-                <Form.Group className="mb-2" onChange={e => this.setState({entry: e.target.value})}>
+                <Form.Group className="mb-2" onChange={e => this.setState({isTransferable: e.target.value})}>
                     <Row>
                         <Col>
                             <Form.Check
@@ -147,7 +150,7 @@ export default class CreateEvent extends Component {
                                 label="Yes"
                                 name="formHorizontalRadios"
                                 id="formHorizontalRadios1"
-                                value={"Single"}
+                                value={"True"}
                             />
                         </Col>
                         <Col>
@@ -156,7 +159,7 @@ export default class CreateEvent extends Component {
                                 label="No"
                                 name="formHorizontalRadios"
                                 id="formHorizontalRadios2"
-                                value={"Multi"}
+                                value={"False"}
                             />
                         </Col>
                     </Row>

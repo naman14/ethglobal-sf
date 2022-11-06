@@ -6,6 +6,7 @@
     "hardhat": "^2.12.2"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3",
     "@unlock-protocol/contracts": "^0.0.13",
     "bootstrap": "^5.2.2",
     "react-bootstrap": "^2.5.0",

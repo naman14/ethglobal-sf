@@ -9,7 +9,7 @@ const main = async () => {
     const [deployer] = await ethers.getSigners(); //get the account to deploy the contract
     console.log("interacting with the account:", deployer.address); 
 
-    let contractAddress = '0xcE479646045254e452F1c93f8a387B832Cd41010'
+    let contractAddress = '0xc8ca9e89Eff5E3A4B1D7a3Bd2593F85CDC6a3383'
     const contractInstance = new ethers.Contract(contractAddress, abi, deployer);
     
     // address lockAddress;

@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 
-export const EVENT_CONTRACT_ADDRESS = "0xcE479646045254e452F1c93f8a387B832Cd41010"
+export const EVENT_CONTRACT_ADDRESS = "0xc8ca9e89Eff5E3A4B1D7a3Bd2593F85CDC6a3383"
 export const INFURA_KEY = "ad393a56503f4e61bdf7321bd496f574"
 
 export const eventContract = () => {
@@ -86,6 +86,16 @@ export const EVENT_CONTRACT_ABI = [
               "type": "string"
             },
             {
+              "internalType": "bool",
+              "name": "singleEntry",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "transferrable",
+              "type": "bool"
+            },
+            {
               "internalType": "uint256",
               "name": "totalTickets",
               "type": "uint256"
@@ -104,6 +114,11 @@ export const EVENT_CONTRACT_ABI = [
               "internalType": "uint256",
               "name": "createdAt",
               "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "baseTicketUri",
+              "type": "string"
             }
           ],
           "indexed": false,
@@ -160,6 +175,16 @@ export const EVENT_CONTRACT_ABI = [
               "type": "string"
             },
             {
+              "internalType": "bool",
+              "name": "singleEntry",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "transferrable",
+              "type": "bool"
+            },
+            {
               "internalType": "uint256",
               "name": "totalTickets",
               "type": "uint256"
@@ -178,6 +203,11 @@ export const EVENT_CONTRACT_ABI = [
               "internalType": "uint256",
               "name": "createdAt",
               "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "baseTicketUri",
+              "type": "string"
             }
           ],
           "internalType": "struct Event.EventDetails",
@@ -237,6 +267,16 @@ export const EVENT_CONTRACT_ABI = [
               "type": "string"
             },
             {
+              "internalType": "bool",
+              "name": "singleEntry",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "transferrable",
+              "type": "bool"
+            },
+            {
               "internalType": "uint256",
               "name": "totalTickets",
               "type": "uint256"
@@ -255,6 +295,11 @@ export const EVENT_CONTRACT_ABI = [
               "internalType": "uint256",
               "name": "createdAt",
               "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "baseTicketUri",
+              "type": "string"
             }
           ],
           "internalType": "struct Event.EventDetails[]",
@@ -318,6 +363,16 @@ export const EVENT_CONTRACT_ABI = [
               "type": "string"
             },
             {
+              "internalType": "bool",
+              "name": "singleEntry",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "transferrable",
+              "type": "bool"
+            },
+            {
               "internalType": "uint256",
               "name": "totalTickets",
               "type": "uint256"
@@ -336,6 +391,11 @@ export const EVENT_CONTRACT_ABI = [
               "internalType": "uint256",
               "name": "createdAt",
               "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "baseTicketUri",
+              "type": "string"
             }
           ],
           "internalType": "struct Event.EventDetails",
@@ -399,6 +459,16 @@ export const EVENT_CONTRACT_ABI = [
               "type": "string"
             },
             {
+              "internalType": "bool",
+              "name": "singleEntry",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "transferrable",
+              "type": "bool"
+            },
+            {
               "internalType": "uint256",
               "name": "totalTickets",
               "type": "uint256"
@@ -417,45 +487,16 @@ export const EVENT_CONTRACT_ABI = [
               "internalType": "uint256",
               "name": "createdAt",
               "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "baseTicketUri",
+              "type": "string"
             }
           ],
           "internalType": "struct Event.EventDetails[]",
           "name": "",
           "type": "tuple[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "lockAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "keyOwner",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "expirationTimestamp",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bool",
-          "name": "isValidKey",
-          "type": "bool"
-        }
-      ],
-      "name": "hasValidKey",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
         }
       ],
       "stateMutability": "view",
@@ -493,29 +534,6 @@ export const EVENT_CONTRACT_ABI = [
         }
       ],
       "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "operator",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "to",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "refund",
-          "type": "uint256"
-        }
-      ],
-      "name": "onKeyCancel",
-      "outputs": [],
-      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -590,6 +608,24 @@ export const EVENT_CONTRACT_ABI = [
         }
       ],
       "name": "onKeyTransfer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "lockAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_baseTicketUri",
+          "type": "string"
+        }
+      ],
+      "name": "setTicketBaseUri",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

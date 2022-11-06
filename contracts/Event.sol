@@ -8,9 +8,9 @@ import "@unlock-protocol/contracts/dist/Hooks/ILockKeyCancelHook.sol";
 import "@unlock-protocol/contracts/dist/Hooks/ILockValidKeyHook.sol";
 import "@unlock-protocol/contracts/dist/Hooks/ILockTokenURIHook.sol";
 import "@unlock-protocol/contracts/dist/Hooks/ILockKeyTransferHook.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract Event {
-
     event NewEvent(
         address indexed lockAddress,
         address indexed eventCreator,
@@ -26,10 +26,13 @@ contract Event {
         string organiser;
         string organiserContact;
         string coverImageUri;
+        bool singleEntry;
+        bool transferrable;
         uint256 totalTickets;
         uint256 startTime;
         uint256 endTime;
         uint256 createdAt;
+        string baseTicketUri;
     }
 
     EventDetails[] private allEvents;
@@ -37,6 +40,8 @@ contract Event {
     mapping(address => EventDetails[]) private organisersToEvents;
 
     address unlockFactoryAddress;
+
+    using Strings for uint256;
 
     constructor(address _unlockFactoryAddress) {
         unlockFactoryAddress = _unlockFactoryAddress;
@@ -59,8 +64,8 @@ contract Event {
         IPublicLock(lockAddress).addLockManager(msg.sender);
         IPublicLock(lockAddress).setEventHooks(
             address(this),
-            address(this),
-            address(this),
+            address(0),
+            address(0),
             address(this),
             address(this),
             address(0),
@@ -79,12 +84,26 @@ contract Event {
         return allEvents;
     }
 
-     function getEventsForOrganiser(address organiser) public view returns (EventDetails[] memory) {
+    function getEventsForOrganiser(address organiser)
+        public
+        view
+        returns (EventDetails[] memory)
+    {
         return organisersToEvents[organiser];
     }
 
-    function getEventForLock(address lockAddress) public view returns (EventDetails memory) {
+    function getEventForLock(address lockAddress)
+        public
+        view
+        returns (EventDetails memory)
+    {
         return locksToEvent[lockAddress];
+    }
+
+    function setTicketBaseUri(address lockAddress, string memory _baseTicketUri) public {
+        IPublicLock lock = IPublicLock(lockAddress);
+        require(lock.hasRole(lock.LOCK_MANAGER_ROLE(), msg.sender), "only lock managers can set base uri");
+        locksToEvent[lockAddress].baseTicketUri = _baseTicketUri;
     }
 
     function keyPurchasePrice(
@@ -105,21 +124,6 @@ contract Event {
         uint256 pricePaid
     ) external {}
 
-    function onKeyCancel(
-        address operator,
-        address to,
-        uint256 refund
-    ) external {}
-
-    function hasValidKey(
-        address lockAddress,
-        address keyOwner,
-        uint256 expirationTimestamp,
-        bool isValidKey
-    ) external view returns (bool) {
-        return true;
-    }
-
     function tokenURI(
         address lockAddress,
         address operator,
@@ -127,7 +131,8 @@ contract Event {
         uint256 keyId,
         uint256 expirationTimestamp
     ) external view returns (string memory) {
-        return "";
+        string memory baseTicketUri= locksToEvent[lockAddress].baseTicketUri;
+        return string(abi.encodePacked(baseTicketUri,  "?ticketId=",  keyId.toString()));
     }
 
     function onKeyTransfer(
@@ -138,6 +143,6 @@ contract Event {
         address to,
         uint256 expirationTimestamp
     ) external {
-
+        require(locksToEvent[lockAddress].transferrable, "ticket not transferrable");
     }
 }
