@@ -14,6 +14,7 @@ import EventList from './components/events-list';
 
 import EventDetails from './EventDetails';
 import CreateEvent from "./components/CreateEvent";
+import { fetchLensHandleMumbai } from './fetchEvents';
 
 import {createNewEvent} from "./createEvent";
 
@@ -52,8 +53,18 @@ class App extends Component {
     constructor(props) {
         super();
         this.state = {
-            page: 'home'
+            page: 'home',
+            currentUserLensName: ''
         }
+        
+    }
+    componentDidMount(){
+      const fetchMumbaiHandle = async (address) => {
+        let handle = await fetchLensHandleMumbai(address)
+        console.log("result handle" + handle)
+        this.setState({currentUserLensName: handle})
+      }
+      setTimeout(fetchMumbaiHandle, 1500, "0x182f47576bCFa1B9e2317495399cc6a0C3DE8f86")
     }
 
     routeToPage = (page) => {
@@ -88,7 +99,7 @@ class App extends Component {
 const Content = (props) => {
     const {isConnected} = useAccount()
     const [action, setAction] = useState('');
-    const {routeToPage} = props;
+    const {routeToPage, currentUserLensName} = props;
 
     if (!isConnected) {
         return <ConnectKitButton/>
@@ -100,7 +111,7 @@ const Content = (props) => {
         <div style={{display: 'flex', flexDirection: 'column', width: '100%', top: '0px'}}>
 
             <div>
-                <IndexHeader routeToPage={routeToPage}></IndexHeader>
+                <IndexHeader routeToPage={routeToPage} currentUserLensName={currentUserLensName}></IndexHeader>
                 <img style={{width: '100%', height: '300px'}} src="/images/header-background.png"></img>
                 <HeaderTitle>Discover Web3 Events</HeaderTitle>
             </div>

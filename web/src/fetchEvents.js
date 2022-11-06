@@ -97,7 +97,31 @@ export const fetchLensHandles = async (addresses) => {
     });
     let data = await client.query({query: gql(hadnleQuery)});
     // console.log("Fetching lens stuff")
-    console.log(data)
+    // console.log(data)
+    // fetchLensHandleMumbai("0x182f47576bCFa1B9e2317495399cc6a0C3DE8f86")
     return data.data.profiles
+}
+
+export const fetchLensHandleMumbai = async (address) => {
+    // console.log("fetching lens for " + address)
+    const hadnleQuery = `query DefaultProfile {
+        profiles(request: { ownedBy: "${address}"}) {
+          items {
+          id
+          name
+          bio
+          isDefault
+          followNftAddress
+          metadata
+          handle}
+      }
+      }`
+    const client = new ApolloClient({
+        uri: 'https://api-mumbai.lens.dev/playground',
+        cache: new InMemoryCache(),
+    });
+    let data = await client.query({query: gql(hadnleQuery)});
+    // console.log("Fetching lens stuff")
+    return data.data.profiles.items[0].handle
 }
 
