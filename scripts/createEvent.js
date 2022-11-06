@@ -9,7 +9,7 @@ const main = async () => {
     const [deployer] = await ethers.getSigners(); //get the account to deploy the contract
     console.log("interacting with the account:", deployer.address); 
 
-    let contractAddress = '0xc8ca9e89Eff5E3A4B1D7a3Bd2593F85CDC6a3383'
+    let contractAddress = '0x5ae6922e1C275A6f6fc78D3Ce0BCa84D63aE82B4'
     const contractInstance = new ethers.Contract(contractAddress, abi, deployer);
     
     // address lockAddress;
@@ -34,13 +34,16 @@ const main = async () => {
         'ETHGlobal',
         'https://twitter.com/ethglobal',
         '',
+        false,
+        false,
         1500,
         Date.now() - 24 * 60 * 60 * 1000,
         Date.now() + 24 * 60 * 60 * 1000,
-        Date.now()
+        Date.now(),
+        'base uri'
     ]
 
-    var result = await contractInstance.createEvent(eventDetails, { value: '0'})
+    var result = await contractInstance.estimateGas.createEvent(eventDetails, { value: '0'})
     console.log(result)
 
   };

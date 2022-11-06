@@ -19,8 +19,6 @@ export const fetchEvents = async () => {
         "credentials": "omit"
     });
 
-    fetchPeopleCounts();
-
     let responseJson = await response.json()
     let events = responseJson.data.events
 
