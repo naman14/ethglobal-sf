@@ -59,8 +59,36 @@ export default class CreateEvent extends Component {
         this.routeToPage('home');
     }
 
-    uploadTicketToIPFS = async () => {
-        // const fileLoc =
+    uploadTicketToIPFS = async (e) => {
+        const fileImg = e.target.files[0]
+        console.log(fileImg);
+        if (fileImg) {
+            try {
+
+                const formData = new FormData();
+                formData.append("file", fileImg);
+
+                const resFile = await axios({
+                    method: "post",
+                    url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+                    data: formData,
+                    headers: {
+                        'pinata_api_key': '8c945ab09fbaf629064c',
+                        'pinata_secret_api_key': '7d643f07a4f64e5babf40b940bc4c86372208c316b4ca22f19eb0d5802dc8604',
+                        "Content-Type": "multipart/form-data"
+                    },
+                });
+
+                const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
+                console.log(ImgHash);
+//Take a look at your Pinata Pinned section, you will see a new file added to you list.
+
+
+            } catch (error) {
+                console.log("Error sending File to IPFS: ")
+                console.log(error)
+            }
+        }
     }
 
     fileToDataUri = (file) => new Promise((resolve, reject) => {
