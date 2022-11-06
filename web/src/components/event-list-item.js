@@ -4,6 +4,7 @@ import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Moment from 'react-moment';
 
 import styled from 'styled-components'
 
@@ -77,7 +78,7 @@ const WalletSignedUpImg = styled.img`
 width: 32px;
 height: 32px;
 left: 20px;
-margin-top: 50px;
+margin-top: 40px;
 margin-left: 20px;
 
 background: #FFFFFF;
@@ -87,7 +88,7 @@ border-radius: 103.571px;
 const WalletSignedUpText = styled.span`
 height: 18px;
 left: 341px;
-margin-top: 57px;
+margin-top: 47px;
 margin-left: 15px;
 
 font-family: 'Satoshi';
@@ -127,6 +128,8 @@ export default class EventListItem extends Component {
     constructor(props) {
         super()
         this.event = props.event;
+        this.startDate = new Date(props.event.startTime/1000);
+        this.endDate = new Date(props.event.endTime/1000);
     }
 
     onRegisterClick = () => {
@@ -170,7 +173,10 @@ export default class EventListItem extends Component {
                     <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
 
                         <EventTitle>{this.event.eventTitle}</EventTitle>
-                        <EventLocationTime>{this.event.location} {this.event.startTime}</EventLocationTime>
+                        <EventLocationTime>{this.event.location} <br></br>
+                            <Moment format=" MMM DD hh:mm - " date={this.startDate} />
+                            <Moment format=" MMM DD hh:mm " date={this.endDate} />
+                        </EventLocationTime>
 
                         <div style={{
                             display: 'flex', flexDirection: 'row', textAlign: 'left', justifyContent: 'space-between', flexGrow: 1

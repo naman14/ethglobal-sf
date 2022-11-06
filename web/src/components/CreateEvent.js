@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import {ethers, BigNumber} from "ethers"
+import {ethers} from "ethers"
 
 export default class CreateEvent extends Component {
 
@@ -22,10 +22,12 @@ export default class CreateEvent extends Component {
             endTime: '',
             createdAt: '',
             entry: '',
+            isTransferable: ''
 
         }
         // const {createNewEvent} = props;
         this.submitEvent = props.submitEvent;
+        this.routeToPage = props.routeToPage;
     }
 
     onSubmit = () => {
@@ -41,13 +43,15 @@ export default class CreateEvent extends Component {
             this.state.organiserContact,
             this.state.coverImageUri,
             this.state.totalTickets,
-            Date.now() - 24 * 60 * 60 * 1000,
-            Date.now() + 24 * 60 * 60 * 1000,
+            new Date(this.state.startTime).getTime(),
+            new Date(this.state.endTime).getTime(),
             Date.now()
         ]
 
         this.submitEvent(eventDetails)
+        this.routeToPage('home');
     }
+
 
     render() {
         return (
@@ -132,6 +136,29 @@ export default class CreateEvent extends Component {
                                           onChange={e => this.setState({endTime: e.target.value})}/>
                         </Col>
 
+                    </Row>
+                </Form.Group>
+                <Form.Label>Is Ticket Transferable</Form.Label>
+                <Form.Group className="mb-2" onChange={e => this.setState({entry: e.target.value})}>
+                    <Row>
+                        <Col>
+                            <Form.Check
+                                type="radio"
+                                label="Yes"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios1"
+                                value={"Single"}
+                            />
+                        </Col>
+                        <Col>
+                            <Form.Check
+                                type="radio"
+                                label="No"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios2"
+                                value={"Multi"}
+                            />
+                        </Col>
                     </Row>
                 </Form.Group>
                 <Form.Group>
