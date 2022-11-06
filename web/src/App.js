@@ -8,7 +8,6 @@ import './App.css';
 import DeployLock from './DeployLock'
 import PurchaseKey from './PurchaseKey';
 import IndexHeader from './components/index-header'
-import { fetchEvents } from './fetchEvents';
 
 const alchemyId = process.env.ALCHEMY_ID;
 
@@ -41,7 +40,6 @@ const Content = () => {
   const { isConnected } = useAccount()
   const [action, setAction] = useState('');
 
-  fetchEvents()
   if (!isConnected) {
     return <ConnectKitButton />
 
