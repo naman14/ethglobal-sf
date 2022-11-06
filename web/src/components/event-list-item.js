@@ -117,13 +117,14 @@ background-color: white;
 background: #FFFFFF;
 border-radius: 100px;
 font-family: 'Satoshi';
+margin-right: 16px;
 font-style: normal;
 font-weight: 700;
 font-size: 14px;
 line-height: 100%;
 color: #000000;
-margin-top: -40px;
-margin-left: 550px;
+margin-top: -20px;
+margin-left: 400px;
 
 `
 
@@ -209,7 +210,7 @@ export default class EventListItem extends Component {
                             }}>
                             <RegisterButton onClick={this.onRegisterClick}>Register</RegisterButton>
                                 {this.state.attendeeLens && 
-                                    <span className="attendee-lens-text"><Badge>{this.state.attendeeLens}</Badge> is attending</span>}
+                                    <span className="attendee-lens-text" style={{fontSize: '16px', marginRight: '16px'}}><Badge>{this.state.attendeeLens}</Badge> is attending</span>}
                             </div>
                             
                         </div>
