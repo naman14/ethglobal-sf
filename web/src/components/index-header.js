@@ -16,7 +16,7 @@ function IndexHeader(props) {
             <div className="absolute top-0 right-0 p-4">
                 <ConnectKitButton />
             </div>
-            <a href="https://www.lensfrens.xyz/namand.lens" target="_blank" ><Badge id="lens-badge" bg="secondary">{currentUserLensName}handlefishball123.test</Badge></a>
+            <a href="https://www.lensfrens.xyz/namand.lens" target="_blank" ><Badge id="lens-badge" bg="secondary">{currentUserLensName}</Badge></a>
         </>
     );
 }

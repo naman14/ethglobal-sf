@@ -84,7 +84,7 @@ class App extends Component {
                 <header className="App-header">
                     <WagmiConfig client={client}>
                         <ConnectKitProvider>
-                            {this.state.page === 'home' ? <Content routeToPage={this.routeToPage}></Content> : ''}
+                            {this.state.page === 'home' ? <Content routeToPage={this.routeToPage} currentUserLensName={this.state.currentUserLensName}></Content> : ''}
                             {this.state.page === 'create' ? <CreateEvent routeToPage={this.routeToPage}
                                                                          submitEvent={createNewEvent}></CreateEvent> : ''}
                         </ConnectKitProvider>
@@ -100,6 +100,7 @@ const Content = (props) => {
     const {isConnected} = useAccount()
     const [action, setAction] = useState('');
     const {routeToPage, currentUserLensName} = props;
+    console.log("FETCHING PROPS: ", currentUserLensName);
 
     if (!isConnected) {
         return <ConnectKitButton/>
