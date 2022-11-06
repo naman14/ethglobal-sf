@@ -2,14 +2,16 @@ import * as React from 'react'
 
 import './index-header.css';
 import Button from 'react-bootstrap/Button';
+import { ConnectKitProvider, ConnectKitButton, getDefaultClient } from "connectkit";
 
 function IndexHeader() {
     return (
         <>
-            <div  id="main-header"></div>
-            <div class="d-flex justify-content-start"><h4 id="event-header-subtitle">WEB3MOVES  🎉</h4></div>
-            <Button id="create-event-but" variant="light">Create Event</Button>{' '}
-            <div class="d-flex justify-content-center"><h1 id="event-header-title">Discover Web3 Events</h1></div>
+            <h4 id="event-header-subtitle">WEB3MOVES</h4>
+            <Button id="create-event-but">Create an event</Button>{' '}
+            <div className="absolute top-0 right-0 p-4">
+                <ConnectKitButton />
+            </div>
         </>
     );
 }

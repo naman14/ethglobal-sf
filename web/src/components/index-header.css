@@ -1,14 +1,22 @@
 #main-header {
-    background-image: url(../../public/header-background.png);
-    width: 1000px;
-    height: 300px;
+    width: 100%;
 }
 
 #create-event-but {
-    right: 30px;
-    top: 25px;
     position: absolute;
-    border-radius: 20px;
+width: 151px;
+height: 45px;
+left: 1135px;
+top: 23px;
+
+background: #FFFFFF;
+border-radius: 100px;
+font-family: 'Satoshi';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 100%;
+color: #000000;
 }
 
 #event-header-title {
@@ -19,7 +27,19 @@
 
 #event-header-subtitle {
     position: absolute;
-    top: 25px;
-    left: 20px;
-    font-size: 15px;
+width: 150px;
+height: 20px;
+left: 144px;
+top: 40px;
+
+font-family: 'Satoshi';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 100%;
+/* identical to box height, or 20px */
+
+letter-spacing: -0.04em;
+
+color: #FFFFFF;
 }
